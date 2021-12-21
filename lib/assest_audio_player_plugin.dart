@@ -3,7 +3,10 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 
-class AssestAudioPlayerPlugin {
+
+class AssestAudioPlayerPlugin  {
+
+
   static const MethodChannel _channel = MethodChannel('assest_audio_player_plugin.github.in');
 
   static Future<String?> get platformVersion async {
