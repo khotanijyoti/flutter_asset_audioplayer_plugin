@@ -2,12 +2,12 @@ package com.assestaudioplayer.assest_audio_player_plugin.notification
 
 import android.content.Context
 import android.content.Intent
+import android.media.session.MediaSession.FLAG_HANDLES_MEDIA_BUTTONS
+
 import android.os.Bundle
-import android.support.v4.media.session.MediaControllerCompat
 import android.support.v4.media.session.MediaSessionCompat
-import android.support.v4.media.session.MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS
-import android.support.v4.media.session.PlaybackStateCompat
 import android.view.KeyEvent
+
 
 class MediaButtonsReceiver(context: Context, private val onAction: (MediaButtonAction) -> Unit, private val onNotifSeek: (Long) -> Unit) {
 

@@ -14,10 +14,11 @@ import android.os.IBinder
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import android.support.v4.media.session.PlaybackStateCompat.ACTION_SEEK_TO
+
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.media.session.MediaButtonReceiver
-import com.github.florent37.assets_audio_player.R
+import com.assestaudioplayer.assest_audio_player_plugin.R
 import com.google.android.exoplayer2.C
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -284,8 +285,10 @@ class NotificationService : Service() {
                 .setSmallIcon(getSmallIcon(context))
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .setPriority(NotificationCompat.PRIORITY_MAX)
-                .setContentTitle(action.audioMetas.title)
-                .setContentText(action.audioMetas.artist)
+            .setContentTitle("JYOTI'S PLUGIN")
+                //.setContentTitle(action.audioMetas.title)
+            .setContentText("TESTING")
+                //.setContentText(action.audioMetas.artist)
                 .setOnlyAlertOnce(true)
                 .also {
                     if (!action.audioMetas.album.isNullOrEmpty()) {

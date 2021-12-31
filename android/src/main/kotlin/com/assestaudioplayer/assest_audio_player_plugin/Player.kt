@@ -1,18 +1,21 @@
 package com.assestaudioplayer.assest_audio_player_plugin
 
 import android.content.Context
-import android.content.Intent
 import android.media.AudioManager
 import android.os.Handler
 import android.os.Message
-import com.github.florent37.assets_audio_player.headset.HeadsetStrategy
-import com.github.florent37.assets_audio_player.notification.AudioMetas
-import com.github.florent37.assets_audio_player.notification.NotificationManager
-import com.github.florent37.assets_audio_player.notification.NotificationService
-import com.github.florent37.assets_audio_player.notification.NotificationSettings
-import com.github.florent37.assets_audio_player.playerimplem.*
-import com.github.florent37.assets_audio_player.stopwhencall.AudioFocusStrategy
-import com.github.florent37.assets_audio_player.stopwhencall.StopWhenCall
+import com.assestaudioplayer.assest_audio_player_plugin.headset.HeadsetStrategy
+import com.assestaudioplayer.assest_audio_player_plugin.notification.AudioMetas
+import com.assestaudioplayer.assest_audio_player_plugin.notification.NotificationManager
+import com.assestaudioplayer.assest_audio_player_plugin.notification.NotificationService
+import com.assestaudioplayer.assest_audio_player_plugin.notification.NotificationSettings
+import com.assestaudioplayer.assest_audio_player_plugin.playerimplem.DurationMS
+import com.assestaudioplayer.assest_audio_player_plugin.playerimplem.PlayerFinder
+import com.assestaudioplayer.assest_audio_player_plugin.playerimplem.PlayerFinderConfiguration
+import com.assestaudioplayer.assest_audio_player_plugin.playerimplem.PlayerImplem
+import com.assestaudioplayer.assest_audio_player_plugin.stopwhencall.AudioFocusStrategy
+import com.assestaudioplayer.assest_audio_player_plugin.stopwhencall.StopWhenCall
+
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodChannel
 import kotlinx.coroutines.Dispatchers
@@ -25,11 +28,11 @@ import kotlin.math.min
  * Does not depend on Flutter, feel free to use it in all your projects
  */
 class Player(
-        val id: String,
-        private val context: Context,
-        private val stopWhenCall: StopWhenCall,
-        private val notificationManager: NotificationManager,
-        private val flutterAssets: FlutterPlugin.FlutterAssets
+    val id: String,
+    private val context: Context,
+    private val stopWhenCall: StopWhenCall,
+    private val notificationManager: NotificationManager,
+    private val flutterAssets: FlutterPlugin.FlutterAssets
 ) {
 
     companion object {
@@ -541,13 +544,13 @@ class ForwardHandler : Handler() {
         const val DELAY = 300L
     }
 
-    private var player: com.github.florent37.assets_audio_player.Player? = null
+    private var player: Player? = null
     private var speed: Double = 1.0
 
     val isActive: Boolean
         get() = hasMessages(MESSAGE_FORWARD)
 
-    fun start(player: com.github.florent37.assets_audio_player.Player, speed: Double) {
+    fun start(player: Player, speed: Double) {
         this.player = player
         this.speed = speed
         removeMessages(MESSAGE_FORWARD)

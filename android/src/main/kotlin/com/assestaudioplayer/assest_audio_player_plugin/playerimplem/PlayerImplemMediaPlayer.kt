@@ -5,9 +5,10 @@ import android.media.MediaPlayer
 import android.media.MediaPlayer.*
 import android.net.Uri
 import android.util.Log
-import com.github.florent37.assets_audio_player.AssetAudioPlayerThrowable
-import com.github.florent37.assets_audio_player.AssetsAudioPlayerPlugin
-import com.github.florent37.assets_audio_player.Player
+import com.assestaudioplayer.assest_audio_player_plugin.AssestAudioPlayerPlugin
+import com.assestaudioplayer.assest_audio_player_plugin.AssetAudioPlayerThrowable
+import com.assestaudioplayer.assest_audio_player_plugin.Player
+
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -26,7 +27,7 @@ class PlayerImplemTesterMediaPlayer : PlayerImplemTester {
 
 
     override suspend fun open(configuration: PlayerFinderConfiguration): PlayerFinder.PlayerWithDuration {
-        if(AssetsAudioPlayerPlugin.displayLogs) {
+        if(AssestAudioPlayerPlugin.displayLogs) {
             Log.d("PlayerImplem", "trying to open with native mediaplayer")
         }
         val mediaPlayer = PlayerImplemMediaPlayer(
@@ -56,7 +57,7 @@ class PlayerImplemTesterMediaPlayer : PlayerImplemTester {
                     duration = durationMS!!
             )
         } catch (t: Throwable) {
-            if(AssetsAudioPlayerPlugin.displayLogs) {
+            if(AssestAudioPlayerPlugin.displayLogs) {
                 Log.d("PlayerImplem", "failed to open with native mediaplayer")
             }
 

@@ -3,13 +3,14 @@ package com.assestaudioplayer.assest_audio_player_plugin.notification
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import com.github.florent37.assets_audio_player.AssetsAudioPlayerPlugin
+import com.assestaudioplayer.assest_audio_player_plugin.AssestAudioPlayerPlugin
+
 
 class NotificationActionReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         val playerId = intent.getStringExtra(NotificationService.EXTRA_PLAYER_ID) ?: return
         val trackID = if (intent.getStringExtra(NotificationService.TRACK_ID) == null) "" else intent.getStringExtra(NotificationService.TRACK_ID)
-        val player = AssetsAudioPlayerPlugin.instance?.assetsAudioPlayer?.getPlayer(playerId) ?: return
+        val player = AssestAudioPlayerPlugin.instance?.assetsAudioPlayer?.getPlayer(playerId) ?: return
         when (intent.action) {
              NotificationAction.ACTION_PREV -> player.prev()
              NotificationAction.ACTION_STOP -> {

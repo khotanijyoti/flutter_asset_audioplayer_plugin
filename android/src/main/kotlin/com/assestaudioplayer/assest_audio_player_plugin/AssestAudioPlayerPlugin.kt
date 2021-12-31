@@ -111,6 +111,9 @@ class AssestAudioPlayerPlugin: FlutterPlugin, MethodCallHandler, PluginRegistry.
   override fun onAttachedToActivity(binding: ActivityPluginBinding) {
     binding.addOnNewIntentListener(this)
     myActivity = binding.activity;
+
+
+
   }
 
   override fun onDetachedFromActivityForConfigChanges() {
@@ -217,7 +220,7 @@ class  AssetsAudioPlayer(
           channel.invokeMethod(METHOD_POSITION, positionMS)
         }
         onReadyToPlay = { totalDurationMs ->
-          channel.invokeMethod(METHOD_CURRENT, mapOf( totalDurationMs))
+          channel.invokeMethod(METHOD_CURRENT, mapOf( "totalDurationMs" to totalDurationMs))
         }
         onSessionIdFound = { sessionId ->
           channel.invokeMethod(METHOD_AUDIO_SESSION_ID, sessionId)
@@ -567,6 +570,10 @@ class  AssetsAudioPlayer(
       }
       else -> result.notImplemented()
     }
+  }
+
+  fun registerLastPlayerWithNotif(playerId: String) {
+    this.lastPlayerIdWithNotificationEnabled = playerId
   }
 
   fun onMediaButton(action: MediaButtonsReceiver.MediaButtonAction) {

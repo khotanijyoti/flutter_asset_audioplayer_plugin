@@ -1,7 +1,7 @@
 package com.assestaudioplayer.assest_audio_player_plugin.playerimplem
 
 import android.content.Context
-import com.github.florent37.assets_audio_player.AssetAudioPlayerThrowable
+import com.assestaudioplayer.assest_audio_player_plugin.AssetAudioPlayerThrowable
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 
 interface PlayerImplemTester {

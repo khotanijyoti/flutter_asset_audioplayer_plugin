@@ -1,8 +1,12 @@
 
+
+
 import 'package:assest_audio_player_plugin/assets_audio_player.dart';
-import 'package:assest_audio_player_plugin/builders/player_builders.dart';
-import 'package:assest_audio_player_plugin/player_group.dart';
 import 'package:flutter/widgets.dart';
+
+import '../player_group.dart';
+import 'player_builders.dart';
+
 
 extension AssetAudioPlayerBuilder on AssetsAudioPlayer {
   PlayerBuilder builderIsPlaying({

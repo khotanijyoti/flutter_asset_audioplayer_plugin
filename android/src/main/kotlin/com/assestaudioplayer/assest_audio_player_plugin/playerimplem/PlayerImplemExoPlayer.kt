@@ -5,9 +5,9 @@ import android.net.Uri
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
-import com.github.florent37.assets_audio_player.AssetAudioPlayerThrowable
-import com.github.florent37.assets_audio_player.AssetsAudioPlayerPlugin
-import com.github.florent37.assets_audio_player.Player
+import com.assestaudioplayer.assest_audio_player_plugin.AssetAudioPlayerThrowable
+import com.assestaudioplayer.assest_audio_player_plugin.AssestAudioPlayerPlugin
+import com.assestaudioplayer.assest_audio_player_plugin.Player
 import com.google.android.exoplayer2.*
 import com.google.android.exoplayer2.C.AUDIO_SESSION_ID_UNSET
 import com.google.android.exoplayer2.Player.REPEAT_MODE_ALL
@@ -42,7 +42,7 @@ class PlayerImplemTesterExoPlayer(private val type: Type) : PlayerImplemTester {
 
 
     override suspend fun open(configuration: PlayerFinderConfiguration) : PlayerFinder.PlayerWithDuration {
-        if(AssetsAudioPlayerPlugin.displayLogs) {
+        if(AssestAudioPlayerPlugin.displayLogs) {
             Log.d("PlayerImplem", "trying to open with exoplayer($type)")
         }
         //some type are only for web
@@ -81,7 +81,7 @@ class PlayerImplemTesterExoPlayer(private val type: Type) : PlayerImplemTester {
                     duration = durationMS!!
             )
         } catch (t: Throwable) {
-            if(AssetsAudioPlayerPlugin.displayLogs) {
+            if(AssestAudioPlayerPlugin.displayLogs) {
                 Log.d("PlayerImplem", "failed to open with exoplayer($type)")
             }
             mediaPlayer?.release()

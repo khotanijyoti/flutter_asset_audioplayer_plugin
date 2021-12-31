@@ -68,6 +68,7 @@ class PlayerEditor {
   PlayerEditor._(this.assetsAudioPlayer);
 
   void onAudioRemovedAt(int index) {
+
     if (assetsAudioPlayer._playlist != null) {
       if (index < assetsAudioPlayer._playlist!.playlistIndex) {
         assetsAudioPlayer._playlist!.playlistIndex =
@@ -842,18 +843,22 @@ class AssetsAudioPlayer {
     bool keepLoopMode = true,
   }) async {
     if (_playlist != null) {
+      print("nextsong");
       if (loopMode.value == LoopMode.single) {
         if (!requestByUser) {
+          print("loop_single");
           await seek(Duration.zero);
           return true;
         } else {
           if (!keepLoopMode) {
+            print("keepLoopMode");
             await setLoopMode(LoopMode
                 .playlist); //on loop.single + next, change it to loopMode.playlist
           }
         }
       }
       if (_playlist!.hasNext()) {
+        print("_playlist_next");
         final curr = _current.valueOrNull;
         if (curr != null) {
           _playlistAudioFinished.add(Playing(
@@ -861,7 +866,10 @@ class AssetsAudioPlayer {
             index: curr.index,
             hasNext: true,
             playlist: _current.value!.playlist,
+
           ));
+          print("index::"+curr.index.toString());
+          print("audio::"+curr.audio.toString());
         }
         _playlist!.selectNext();
         await _openPlaylistCurrent();
@@ -869,6 +877,7 @@ class AssetsAudioPlayer {
         return true;
       } else if (loopMode.value == LoopMode.playlist) {
         //last element
+        print("loop_mode_playlist");
         final curr = _current.valueOrNull;
         if (curr != null) {
           _playlistAudioFinished.add(Playing(
@@ -884,10 +893,12 @@ class AssetsAudioPlayer {
 
         return true;
       } else if (stopIfLast) {
+
         await stop();
         return true;
       } else if (requestByUser) {
         //last element
+        print("requestByUser");
         final curr = _current.valueOrNull;
         if (curr != null) {
           _playlistAudioFinished.add(Playing(
@@ -903,6 +914,8 @@ class AssetsAudioPlayer {
 
         return true;
       }
+    }else{
+      print("nextnot");
     }
     return false;
   }
@@ -1527,6 +1540,7 @@ class _CurrentPlaylist {
       index = index + 1;
     }
     playlistIndex = index;
+    print( "nextindex::"+playlistIndex.toString());
   }
 
   List<int> indexList = [];

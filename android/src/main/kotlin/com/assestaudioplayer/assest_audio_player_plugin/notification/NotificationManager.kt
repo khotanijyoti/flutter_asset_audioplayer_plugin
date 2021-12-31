@@ -2,7 +2,7 @@ package com.assestaudioplayer.assest_audio_player_plugin.notification
 
 import android.content.Context
 import android.content.Intent
-import com.github.florent37.assets_audio_player.AssetsAudioPlayerPlugin
+import com.assestaudioplayer.assest_audio_player_plugin.AssestAudioPlayerPlugin
 
 class NotificationManager(private val context: Context) {
 
@@ -25,7 +25,7 @@ class NotificationManager(private val context: Context) {
                     ))
                 })
             }
-            AssetsAudioPlayerPlugin.instance?.assetsAudioPlayer?.registerLastPlayerWithNotif(playerId)
+            AssestAudioPlayerPlugin.instance?.assetsAudioPlayer?.registerLastPlayerWithNotif(playerId)
         } catch (t: Throwable) {
             t.printStackTrace()
         }
