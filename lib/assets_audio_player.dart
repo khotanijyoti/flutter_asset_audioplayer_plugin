@@ -254,7 +254,6 @@ class AssetsAudioPlayer {
       playSpeed: playSpeed,
     );
   }
-
   ReadingPlaylist? get readingPlaylist {
     if (_playlist == null) {
       return null;
@@ -736,10 +735,12 @@ class AssetsAudioPlayer {
   Future<bool> previous({bool keepLoopMode = true}) async {
     if (_playlist != null) {
       // more than 5 sec played, go back to the start of audio
-      if (_currentPosition.valueOrNull != null &&
-          _currentPosition.valueOrNull!.inSeconds >= 5) {
-        await seek(Duration.zero, force: true);
-      } else if (_playlist!.hasPrev()) {
+      // if (_currentPosition.valueOrNull != null &&
+      //     _currentPosition.valueOrNull!.inSeconds >= 5) {
+      //   await seek(Duration.zero, force: true);
+      // }
+
+        if (_playlist!.hasPrev()) {
         if (!keepLoopMode) {
           if (loopMode.value == LoopMode.single) {
             await setLoopMode(LoopMode.playlist);
@@ -806,6 +807,8 @@ class AssetsAudioPlayer {
   Future<void> _openPlaylistCurrent(
       {bool autoStart = true, Duration? seek}) async {
     if (_playlist != null) {
+      print("OPEN PLAYLIST");
+      print(_playlist!.currentAudio());
       return _open(
         _playlist!.currentAudio(),
         forcedVolume: _playlist!.volume,
@@ -1064,11 +1067,8 @@ class AssetsAudioPlayer {
         if (audio.package != null) {
           params['package'] = audio.package.toString();
         }
-        if (audio.audioType == AudioType.file ||
-            audio.audioType == AudioType.network ||
-            audio.audioType == AudioType.liveStream) {
-          params['networkHeaders'] =
-              audio.networkHeaders ?? networkSettings.defaultHeaders;
+        if (audio.audioType == AudioType.file || audio.audioType == AudioType.network || audio.audioType == AudioType.liveStream) {
+          params['networkHeaders'] = audio.networkHeaders ?? networkSettings.defaultHeaders;
         }
 
         if(audio.drmConfiguration != null){
@@ -1175,7 +1175,7 @@ class AssetsAudioPlayer {
 
     playlist.setCurrentlyOpenedIn(_playerEditor);
 
-    return _openPlaylistCurrent(autoStart: autoStart, seek: seek);
+    return _openPlaylistCurrent(autoStart: autoStart , seek: seek);
   }
 
   bool get _isLiveStream {
@@ -1261,7 +1261,7 @@ class AssetsAudioPlayer {
   ///
   ///     _assetsAudioPlayer.playOfPause();
   ///
-  Future<void> playOrPause() async {
+  Future<void> playOrPause  () async {
     final playing = _isPlaying.valueOrNull ?? true;
     if (playing) {
       await pause();

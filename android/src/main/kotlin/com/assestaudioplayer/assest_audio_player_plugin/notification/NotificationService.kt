@@ -285,10 +285,10 @@ class NotificationService : Service() {
                 .setSmallIcon(getSmallIcon(context))
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .setPriority(NotificationCompat.PRIORITY_MAX)
-            .setContentTitle("JYOTI'S PLUGIN")
-                //.setContentTitle(action.audioMetas.title)
-            .setContentText("TESTING")
-                //.setContentText(action.audioMetas.artist)
+//            .setContentTitle("JYOTI'S PLUGIN")
+                .setContentTitle(action.audioMetas.title)
+//            .setContentText("TESTING")
+                .setContentText(action.audioMetas.artist)
                 .setOnlyAlertOnce(true)
                 .also {
                     if (!action.audioMetas.album.isNullOrEmpty()) {
