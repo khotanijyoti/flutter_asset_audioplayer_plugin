@@ -65,6 +65,7 @@ class PlayerEditor {
   const PlayerEditor(this.assetsAudioPlayer);
 
   final AssetsAudioPlayer assetsAudioPlayer;
+  
   PlayerEditor._(this.assetsAudioPlayer);
 
   void onAudioRemovedAt(int index) {
@@ -124,7 +125,7 @@ class PlayerEditor {
 ///         - assets/audios/
 class AssetsAudioPlayer {
   PlayerEditor? _playerEditor;
-
+  bool issongPlaying = false;
   AssetsAudioPlayerCache _audioPlayerCache = defaultAssetsAudioPlayerCache;
 
   static final double minVolume = 0.0;
@@ -1264,9 +1265,13 @@ class AssetsAudioPlayer {
   Future<void> playOrPause  () async {
     final playing = _isPlaying.valueOrNull ?? true;
     if (playing) {
+      issongPlaying = false;
       await pause();
+
     } else {
+      issongPlaying = true;
       await play();
+
     }
   }
 
